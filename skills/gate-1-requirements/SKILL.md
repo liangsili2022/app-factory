@@ -1,5 +1,6 @@
 ---
 name: gate-1-requirements
+title: Gate 1 Requirements & Architecture
 description: Gate 1 Requirements & Architecture discovery workflow.
 version: 1.0.0
 ---

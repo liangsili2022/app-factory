@@ -1,5 +1,6 @@
 ---
 name: gate-2-tdd
+title: Gate 2 TDD & Implementation
 description: Gate 2 Test-Driven Development execution workflow.
 version: 1.0.0
 ---

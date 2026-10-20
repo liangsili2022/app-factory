@@ -2,7 +2,9 @@
 
 import argparse
 import os
+import shutil
 import sys
+from typing import Dict, List
 from app_factory.doctor import print_doctor_report, run_doctor
 from app_factory.orchestrator import PipelineOrchestrator
 
@@ -30,6 +32,74 @@ TASKS_TEMPLATE = """# Implementation Tasks
 - [ ] Task 2: Implement core logic with TDD unit tests
 - [ ] Task 3: Security audit and clean build verification
 """
+
+
+def get_skills_dir() -> str:
+    """Return the absolute path to the bundled skills directory."""
+    pkg_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    return os.path.join(pkg_root, "skills")
+
+
+def load_skills_catalog() -> List[Dict[str, str]]:
+    """Inspect and return metadata for all bundled skills."""
+    skills_dir = get_skills_dir()
+    catalog = []
+    if not os.path.isdir(skills_dir):
+        return catalog
+
+    for name in sorted(os.listdir(skills_dir)):
+        skill_path = os.path.join(skills_dir, name, "SKILL.md")
+        if os.path.isfile(skill_path):
+            desc = "No description provided."
+            title = name
+            with open(skill_path, "r", encoding="utf-8", errors="ignore") as f:
+                content = f.read()
+                for line in content.splitlines():
+                    if line.startswith("title:"):
+                        title = line.split(":", 1)[1].strip().strip("\"'")
+                    elif line.startswith("description:"):
+                        desc = line.split(":", 1)[1].strip().strip("\"'")
+            catalog.append({"name": name, "title": title, "description": desc, "path": os.path.dirname(skill_path)})
+    return catalog
+
+
+def export_skills(target_agent: str) -> None:
+    """Export bundled skills to target agent environments (Claude, Codex, Hermes, Cursor, all)."""
+    catalog = load_skills_catalog()
+    home = os.path.expanduser("~")
+
+    targets = {
+        "claude": os.path.join(home, ".claude", "skills"),
+        "codex": os.path.join(home, ".codex", "skills"),
+        "hermes": os.path.join(home, ".hermes", "skills", "app-factory"),
+        "cursor": os.path.join(home, ".cursor", "skills"),
+    }
+
+    selected = targets.keys() if target_agent == "all" else [target_agent.lower()]
+
+    print(f"\n📦 Exporting {len(catalog)} App Factory Skills to '{target_agent}'...")
+    for agent in selected:
+        if agent not in targets:
+            print(f"  ⚠ Unknown agent target '{agent}'. Valid: claude, codex, hermes, cursor, all")
+            continue
+        dest_dir = targets[agent]
+        os.makedirs(dest_dir, exist_ok=True)
+        count = 0
+        for skill in catalog:
+            dest_skill_dir = os.path.join(dest_dir, skill["name"])
+            if os.path.exists(dest_skill_dir) or os.path.islink(dest_skill_dir):
+                if os.path.islink(dest_skill_dir):
+                    os.unlink(dest_skill_dir)
+                else:
+                    shutil.rmtree(dest_skill_dir, ignore_errors=True)
+            try:
+                os.symlink(skill["path"], dest_skill_dir)
+                count += 1
+            except Exception:
+                shutil.copytree(skill["path"], dest_skill_dir)
+                count += 1
+        print(f"  ✓ Installed {count} skills to {dest_dir}")
+    print("\n✓ Skill export complete.\n")
 
 
 def init_project(target_dir: str) -> None:
@@ -64,7 +134,7 @@ def main():
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
 
     # doctor
-    subparsers.add_parser("doctor", help="Check local toolchains, AI CLIs, and compilers")
+    subparsers.add_parser("doctor", help="Check local toolchains, Top 10+ AI CLIs, and compilers")
 
     # init
     init_p = subparsers.add_parser("init", help="Initialize App Factory templates in a project")
@@ -87,6 +157,14 @@ def main():
     status_p = subparsers.add_parser("status", help="Show current pipeline state")
     status_p.add_argument("--path", default=".", help="Target project directory")
 
+    # skills
+    skills_p = subparsers.add_parser("skills", help="List or export 10 built-in cross-platform skills")
+    skills_p.add_argument(
+        "--export",
+        choices=["claude", "codex", "hermes", "cursor", "all"],
+        help="Export/install skills into target agent environment",
+    )
+
     args = parser.parse_args()
 
     if not args.command:
@@ -97,6 +175,18 @@ def main():
         report = run_doctor()
         ok = print_doctor_report(report)
         sys.exit(0 if ok else 1)
+
+    elif args.command == "skills":
+        if args.export:
+            export_skills(args.export)
+        else:
+            catalog = load_skills_catalog()
+            print(f"\n🧩 App Factory Cross-Platform Skills ({len(catalog)} available)\n" + "=" * 60)
+            for idx, s in enumerate(catalog, 1):
+                print(f"{idx:2d}. {s['name']:<28} : {s['title']}")
+                print(f"    {s['description']}")
+            print("=" * 60)
+            print("Install into agents via: app-factory skills --export [claude|codex|hermes|cursor|all]\n")
 
     elif args.command == "init":
         init_project(args.path)
@@ -128,10 +218,10 @@ def main():
                 break
         print("=" * 45)
         if all_passed:
-            print("🚀 All 4 Quality Gates PASSED! Ready for deployment.\n")
+            print("🚀 All 4 Quality Gates PASSED! Ready for deployment.\\n")
             sys.exit(0)
         else:
-            print("🛑 Pipeline blocked at current gate. Fix findings before proceeding.\n")
+            print("🛑 Pipeline blocked at current gate. Fix findings before proceeding.\\n")
             sys.exit(1)
 
     elif args.command == "status":

@@ -1,5 +1,6 @@
 ---
 name: gate-3-cso-review
+title: Gate 3 CSO Security & Review
 description: Gate 3 Chief Security Officer & Adversarial Review workflow.
 version: 1.0.0
 ---

@@ -4,6 +4,7 @@ import os
 import shutil
 import tempfile
 import unittest
+from app_factory.cli import load_skills_catalog
 from app_factory.orchestrator import PipelineOrchestrator
 
 
@@ -25,6 +26,16 @@ class TestCLI(unittest.TestCase):
         self.assertEqual(len(results), 1)
         self.assertFalse(results[0]["passed"])
         self.assertEqual(results[0]["gate"], 1)
+
+    def test_load_skills_catalog_count(self):
+        catalog = load_skills_catalog()
+        self.assertGreaterEqual(len(catalog), 10)
+        names = [s["name"] for s in catalog]
+        self.assertIn("anti-ai-slop-design", names)
+        self.assertIn("mobile-app-qa", names)
+        self.assertIn("release-packaging", names)
+        self.assertIn("subagent-delegation", names)
+        self.assertIn("systematic-debugging", names)
 
 
 if __name__ == "__main__":

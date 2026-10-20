@@ -1,5 +1,6 @@
 ---
 name: gate-4-native-shipping
+title: Gate 4 Host Shipping & Compiler
 description: Gate 4 Host compiler verification & production shipping workflow.
 version: 1.0.0
 ---

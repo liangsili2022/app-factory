@@ -23,8 +23,9 @@ class TestDoctor(unittest.TestCase):
     def test_run_doctor_structure(self):
         report = run_doctor()
         self.assertIn("Core Runtimes", report)
-        self.assertIn("AI Agent CLIs", report)
+        self.assertIn("Top AI Coding Agents", report)
         self.assertIn("Native Compilers & SDKs", report)
+        self.assertGreaterEqual(len(report["Top AI Coding Agents"]), 10)
 
 
 if __name__ == "__main__":
