@@ -2,13 +2,13 @@
 
 > **Multi-Agent Software Engineering Pipeline**
 > Combining Garry Tan's **gstack** role disciplines, Jesse Vincent's **Superpowers** engineering rigor, and real-machine compiler verification.
-> Built for the Top 10+ mainstream AI coding agents across big tech and open source.
+> Detects 12 AI coding agent CLIs. Tested end to end on the author's Mac with 6 of them.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![Multi-Agent](https://img.shields.io/badge/Top%2010+%20Agents-Supported-purple.svg)](#supported-top-ai-coding-agents)
+[![Multi-Agent](https://img.shields.io/badge/12%20Agent%20CLIs-Detected-purple.svg)](#supported-top-ai-coding-agents)
 [![Quality Gates](https://img.shields.io/badge/Gates-4--Stage%20Enforced-green.svg)](#the-4-quality-gates)
-[![Skills](https://img.shields.io/badge/Skills-10%20Portable%20Packs-orange.svg)](#-10-battle-tested-cross-platform-skills)
+[![Skills](https://img.shields.io/badge/Skills-10%20Portable%20Packs-orange.svg)](#-10-portable-cross-platform-skills)
 
 ---
 
@@ -26,7 +26,7 @@ Single-agent coding tools are prone to **hallucinated success**: an LLM will cla
 
 ## 🤖 Supported Top AI Coding Agents
 
-App Factory automatically detects, orchestrates, and exports skills to the top 10+ mainstream AI coding agents:
+App Factory detects the agent CLIs below on your PATH and can export its skills to them. Only the ones marked as tested in the note under the table have been run on the author's machine; the rest are detected if installed but not yet tested.
 
 | Agent / CLI | Command | Maintainer / Ecosystem | Role in App Factory |
 |-------------|---------|------------------------|---------------------|
@@ -34,14 +34,16 @@ App Factory automatically detects, orchestrates, and exports skills to the top 1
 | **OpenAI Codex** | `codex` | OpenAI | Lead Engineer & CSO (`/cso`, security audit) |
 | **Hermes Agent** | `hermes` | Nous Research | Factory Commander & host pipeline orchestrator |
 | **Cursor CLI** | `cursor` | Anysphere | Interactive IDE agent & Composer driver |
-| **Muse** | `muse` | Apple | Swift / Apple platform-native specialist |
+| **Muse** | `muse` | Unknown (not verified) | Swift / Apple platform-native specialist |
 | **Grok Bot / CLI** | `grok` / `grok-bot` | xAI | Fast reasoning & real-time knowledge assistant |
 | **GitHub Copilot CLI** | `copilot` / `gh copilot` | GitHub / Microsoft | Git workflow & enterprise compliance checks |
-| **Antigravity** | `agy` | Google Antigravity / Gemini | Unlimited batch reasoning & high-concurrency loops |
+| **Antigravity** | `agy` | Google Antigravity / Gemini | Batch reasoning & parallel loops |
 | **OpenCode** | `opencode` | OpenCode Community | Self-hosted open coding agent |
 | **Aider** | `aider` | Paul Gauthier | Multi-file git-integrated terminal pair programmer |
 | **Windsurf** | `windsurf` | Codeium | Flow-state inline assistant |
 | **Devin CLI** | `devin` | Cognition AI | Autonomous background software engineer |
+
+> **Tested on the author's machine (2026-10-21, `app-factory doctor`):** Claude Code, OpenAI Codex, Hermes Agent, Cursor CLI, Grok CLI, Antigravity. Others: not yet tested.
 
 ---
 
@@ -91,7 +93,7 @@ App Factory automatically detects, orchestrates, and exports skills to the top 1
 
 ---
 
-## 🧩 10 Battle-Tested Cross-Platform Skills
+## 🧩 10 Portable Cross-Platform Skills
 
 App Factory comes preloaded with **10 standardized, agent-agnostic skills** located in `skills/`:
 
@@ -128,7 +130,7 @@ Or run directly without installation:
 
 ### 2. Check Toolchain Health
 
-Inspect all compilers, runtimes, and the Top 10+ AI agent CLIs:
+Inspect all compilers, runtimes, and the 12 supported AI agent CLIs:
 
 ```bash
 app-factory doctor
@@ -220,8 +222,8 @@ app-factory check
 ## 🇨🇳 中文说明 (Chinese Overview)
 
 **App Factory** 是一个结构化的多模型/多 Agent 软件工程工厂流水线：
-- **覆盖主流前 10+ 款 AI Agent**：
-  - 深度支持并自动体检：**Claude Code、OpenAI Codex、Hermes Agent、Cursor、Muse、Grok Bot、GitHub Copilot、Antigravity、OpenCode、Aider、Windsurf、Devin**。
+- **体检 12 款 AI Agent CLI**（作者本机已实测 6 款：Claude Code、OpenAI Codex、Hermes Agent、Cursor CLI、Grok CLI、Antigravity；其余仅在已安装时检测，尚未实测）：
+  - 可检测：**Claude Code、OpenAI Codex、Hermes Agent、Cursor、Muse、Grok Bot、GitHub Copilot、Antigravity、OpenCode、Aider、Windsurf、Devin**。
 - **融合两大家之长**：将 Garry Tan 的 **gstack**（角色分工、CPO 架构、CSO 安全审计、UI 去 Slop）与 Jesse Vincent 的 **Superpowers**（极端严苛的 TDD 红绿测试、原子化任务拆解、独立工作区隔离）深度结合。
 - **开箱即用 10 大跨平台技能包**：
   1. `app-factory-orchestrator`：全周期 4-Gate 总指挥调度

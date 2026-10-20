@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1200px;
+    height: 675px;
+    background: #090D16;
+    color: #F1F5F9;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding: 36px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Background glow effects */
+  .glow-1 {
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    top: -100px;
+    left: -50px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, rgba(99, 102, 241, 0) 70%);
+    pointer-events: none;
+  }
+  .glow-2 {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    bottom: -120px;
+    right: -80px;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0) 70%);
+    pointer-events: none;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 18px;
+    margin-bottom: 22px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .brand-icon {
+    font-size: 32px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 6px 12px;
+    border-radius: 12px;
+  }
+  .brand-title {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #FFFFFF 30%, #94A3B8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .brand-subtitle {
+    font-size: 13px;
+    color: #94A3B8;
+    margin-top: 2px;
+    font-weight: 500;
+  }
+  .badges {
+    display: flex;
+    gap: 10px;
+  }
+  .badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: 1px solid;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .badge-mit {
+    background: rgba(245, 158, 11, 0.1);
+    color: #FBBF24;
+    border-color: rgba(245, 158, 11, 0.3);
+  }
+  .badge-agents {
+    background: rgba(139, 92, 246, 0.12);
+    color: #C084FC;
+    border-color: rgba(139, 92, 246, 0.3);
+  }
+
+  /* Main Split */
+  .main {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 24px;
+    flex: 1;
+  }
+
+  /* Left: 4-Gate Flow */
+  .flow-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+  }
+  .gate-card {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s;
+  }
+  .gate-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+  .g1-num { background: rgba(99, 102, 241, 0.2); color: #818CF8; border: 1px solid #6366F1; }
+  .g2-num { background: rgba(236, 72, 153, 0.2); color: #F472B6; border: 1px solid #EC4899; }
+  .g3-num { background: rgba(245, 158, 11, 0.2); color: #FBBF24; border: 1px solid #F59E0B; }
+  .g4-num { background: rgba(16, 185, 129, 0.2); color: #34D399; border: 1px solid #10B981; }
+
+  .gate-info {
+    flex: 1;
+  }
+  .gate-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2px;
+  }
+  .gate-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #F8FAFC;
+  }
+  .gate-origin {
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748B;
+  }
+  .gate-desc {
+    font-size: 11px;
+    color: #94A3B8;
+    line-height: 1.4;
+  }
+
+  /* Right: Terminal */
+  .terminal {
+    background: #06090F;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+  .terminal-bar {
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .dot-red { background: #EF4444; }
+  .dot-yellow { background: #F59E0B; }
+  .dot-green { background: #10B981; }
+  .terminal-title {
+    margin-left: auto;
+    font-size: 11px;
+    color: #64748B;
+  }
+  .terminal-body {
+    padding: 14px 16px;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #CBD5E1;
+    flex: 1;
+  }
+  .cmd { color: #38BDF8; font-weight: 600; }
+  .success { color: #34D399; font-weight: 600; }
+  .dim { color: #64748B; }
+  .badge-green { color: #10B981; }
+  .badge-purple { color: #A855F7; }
+
+  /* Footer */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 11px;
+    color: #64748B;
+  }
+  .footer-agents {
+    display: flex;
+    gap: 8px;
+    color: #94A3B8;
+    font-weight: 500;
+  }
+  .tag {
+    background: rgba(255, 255, 255, 0.04);
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+</style>
+</head>
+<body>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+
+  <div class="header">
+    <div class="brand">
+      <div class="brand-icon">🏭</div>
+      <div>
+        <div class="brand-title">App Factory</div>
+        <div class="brand-subtitle">Multi-Agent Software Engineering Pipeline · 4-Gate Compiler Enforced</div>
+      </div>
+    </div>
+    <div class="badges">
+      <div class="badge badge-mit">MIT Open Source</div>
+      <div class="badge badge-agents">Top 10+ Agents Supported</div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="flow-container">
+      <div class="gate-card">
+        <div class="gate-num g1-num">G1</div>
+        <div class="gate-info">
+          <div class="gate-header">
+            <span class="gate-name">Requirements & Architecture Gate</span>
+            <span class="gate-origin">Inspired by Garry Tan (gstack)</span>
+          </div>
+          <div class="gate-desc">Claude Code (CPO) locks Target User, Core Value, & Out of Scope. Kills AI slop before coding starts.</div>
+        </div>
+      </div>
+
+      <div class="gate-card">
+        <div class="gate-num g2-num">G2</div>
+        <div class="gate-info">
+          <div class="gate-header">
+            <span class="gate-name">Implementation & TDD Gate</span>
+            <span class="gate-origin">Inspired by Jesse Vincent (Superpowers)</span>
+          </div>
+          <div class="gate-desc">Strict Red-Green TDD iron law. Worktree isolation, failing tests first, zero speculative untested code.</div>
+        </div>
+      </div>
+
+      <div class="gate-card">
+        <div class="gate-num g3-num">G3</div>
+        <div class="gate-info">
+          <div class="gate-header">
+            <span class="gate-name">Security (CSO) & Code Review Gate</span>
+            <span class="gate-origin">Codex Adversarial Audit</span>
+          </div>
+          <div class="gate-desc">Automated secret scan (OpenAI, GitHub, private keys). Zero tolerance for Critical/High defects.</div>
+        </div>
+      </div>
+
+      <div class="gate-card">
+        <div class="gate-num g4-num">G4</div>
+        <div class="gate-info">
+          <div class="gate-header">
+            <span class="gate-name">Native Shipping & Compiler Gate</span>
+            <span class="gate-origin">Hermes Host Toolchain Verification</span>
+          </div>
+          <div class="gate-desc">Rejects AI self-reports. Real xcodebuild, flutter, cargo, and python execution with exit code 0.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="dot dot-red"></div>
+        <div class="dot dot-yellow"></div>
+        <div class="dot dot-green"></div>
+        <span class="terminal-title">zsh — app-factory check</span>
+      </div>
+      <div class="terminal-body">
+        <span class="dim">$</span> <span class="cmd">app-factory doctor</span><br>
+        <span class="dim">[Core Runtimes]</span> Git ✓  Python3 ✓  Node.js ✓<br>
+        <span class="dim">[Top Agents]</span> Claude Code ✓  Codex ✓  Hermes ✓  Cursor ✓<br>
+        <span class="dim">[Compilers]</span> Xcode 26.3 ✓  Flutter 3.41 ✓  Cargo ✓<br>
+        <br>
+        <span class="dim">$</span> <span class="cmd">app-factory check</span><br>
+        <span class="dim">============================================</span><br>
+        [<span class="badge-green">✓</span>] Gate 1: Architecture & PRD<br>
+        [<span class="badge-green">✓</span>] Gate 2: Implementation & TDD<br>
+        [<span class="badge-green">✓</span>] Gate 3: Security & Code Review<br>
+        [<span class="badge-green">✓</span>] Gate 4: Native Shipping & Compilation<br>
+        <span class="dim">============================================</span><br>
+        <span class="success">🚀 All 4 Quality Gates PASSED! Ready for deployment.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>Built with Claude Code • Codex • Hermes • Cursor • Muse • Grok • Copilot • Antigravity</div>
+    <div class="footer-agents">
+      <span class="tag">10 Portable Skills</span>
+      <span class="tag">Zero-Leak Guard</span>
+      <span class="tag">Host Verified</span>
+    </div>
+  </div>
+</body>
+</html>
