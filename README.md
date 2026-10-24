@@ -114,12 +114,18 @@ App Factory comes preloaded with **10 standardized, agent-agnostic skills** loca
 
 ## 🚀 Quick Start
 
+Requires **Python 3.9+** and Git. Run the following commands in a Bash-compatible
+terminal (macOS, Linux, or WSL). AI agent CLIs and native SDKs are optional for
+this introductory demo; install the tools needed by your own project later.
+
 ### 1. Installation
 
 ```bash
 git clone https://github.com/huppy-ai/app-factory.git
 cd app-factory
-pip install -e .
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .
 ```
 
 Or run directly without installation:
@@ -127,6 +133,28 @@ Or run directly without installation:
 ```bash
 ./bin/app-factory --help
 ```
+
+### Try the two-minute demo
+
+From the repository root, run:
+
+```bash
+bash docs/demo/quick-start.sh
+```
+
+The demo runs directly from the checkout, so installation is optional. It shows
+Gate 1 failing on an empty project, creates PRD/task templates, then verifies
+Gate 1 passes. It uses a temporary directory and removes it on exit.
+See the [demo walkthrough](docs/demo/README.md) for expected output and limitations.
+
+To run this repository's tests without additional dependencies:
+
+```bash
+python3 -m unittest discover -s tests -v
+```
+
+Looking for a first contribution? Pick one of the
+[five good first issues](docs/good-first-issues.md).
 
 ### 2. Check Toolchain Health
 
