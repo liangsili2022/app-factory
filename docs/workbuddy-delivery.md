@@ -1,5 +1,21 @@
 # WorkBuddy 专家候选交付
 
+## 当前交付：0.2.2
+
+2026-11-05：APP全球发行专家0.2.2已安装WorkBuddy，源码[4f89ac9](https://github.com/liangsili2022/app-factory/commit/4f89ac904b4c0d10d2eebc0f953ef829cecc0bca)已推送至week1-onboarding。以下旧版本状态为历史记录。
+
+- 候选：dist/app-factory-expert-0.2.2.zip；SHA-256：01fd041a6681c06731c57343681993c872e9879f9bc911eb21c89cfb71bf2ac2。
+- 安装：官方validate/register通过；稳定ID不变；25文件哈希一致，客户端v0.2.2。
+- 验收：21包内检查、11核心测试、全新自然需求首次交付17项独立检查通过。
+- 真实对话RELEASE.md SHA-256：d55c76c45fa1cbfd979d8523c0059e0fab8e981040a20396ed08728ae6e324c0。
+- 0.2.1规划越界失败样本保留；0.2.2固化范围限制和首次自检，旧安装有本机备份。
+- BUILD-MANIFEST的upstream_commit为打包时核心来源a801cce；集成文件随后提交4f89ac9。收尾不重打候选包。
+- 验收限本地软件交付及发行准备；未注册、付款、签名构建手机APP、上传、提审或上架。动态平台要求执行前复核。
+
+详细证据：本机Documents/Codex/2026-11-05/app-factory-workbuddy/acceptance/global-release-v022/ACCEPTANCE.md；最终收尾在该任务目录CLOSEOUT-0.2.2.md。私有Wiki接续记录见[PR #213](https://github.com/liangsili2022/wiki/pull/213)。
+
+## 历史：0.1.0配置与打包
+
 2026-11-05，Codex；版本 0.1.0。
 
 用户确认：单专家内置执行 Skill；本轮范围为配置和打包。
