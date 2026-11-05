@@ -1,6 +1,6 @@
 {
   "name": "app-factory-expert",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Develop apps and prepare multi-platform releases with platform directories, account guidance, and evidence-based release tracking.",
   "author": {
     "name": "Huppy AI & Liang Sili",
@@ -23,8 +23,8 @@
     "en": "App Development and Global Release"
   },
   "displayDescription": {
-    "zh": "从开发测试到国内外应用发行，提供平台选择、账号注册向导、打包与上架材料，逐平台跟踪审核和发布进度。",
-    "en": "Develop apps, choose stores, prepare accounts and release materials, and track each platform with evidence."
+    "zh": "提供APP开发辅助、国内外平台选择、注册向导和发行准备清单，核验交付证据，明确环境与额外费用边界。",
+    "en": "Assist app development, store selection, registration, and release preparation with verified evidence, environment requirements, and cost boundaries."
   },
   "avatar": "avatars/expert.png",
   "categoryId": "02-Engineering",

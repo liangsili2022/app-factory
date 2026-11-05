@@ -5,7 +5,7 @@ display_name_en: Software Development and Delivery
 description: Build or improve software projects and deliver source, meaningful tests, explicit builds, and verified artifacts. Use for development, fixes, packaging, store selection, registration guidance, and multi-platform releases.
 description_zh: 从需求到代码、测试和构建交付，记录实际执行证据及环境限制。
 description_en: Deliver software through requirements, code, tests, explicit builds, and execution evidence.
-version: 0.2.2
+version: 0.2.3
 author: Huppy AI & Liang Sili
 ---
 
