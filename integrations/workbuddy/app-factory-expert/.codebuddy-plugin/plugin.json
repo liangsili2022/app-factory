@@ -1,0 +1,66 @@
+{
+  "name": "app-factory-expert",
+  "version": "0.2.3",
+  "description": "Develop apps and prepare multi-platform releases with platform directories, account guidance, and evidence-based release tracking.",
+  "author": {
+    "name": "Huppy AI & Liang Sili",
+    "email": "liangsili2022@users.noreply.github.com"
+  },
+  "agents": [
+    "./agents/software-delivery.md"
+  ],
+  "skills": [
+    "./skills/app-factory-delivery"
+  ],
+  "expertType": "agent",
+  "agentName": "software-delivery",
+  "displayName": {
+    "zh": "APP全球发行专家",
+    "en": "Global App Release Expert"
+  },
+  "profession": {
+    "zh": "APP开发与全球发行",
+    "en": "App Development and Global Release"
+  },
+  "displayDescription": {
+    "zh": "提供APP开发辅助、国内外平台选择、注册向导和发行准备清单，核验交付证据，明确环境与额外费用边界。",
+    "en": "Assist app development, store selection, registration, and release preparation with verified evidence, environment requirements, and cost boundaries."
+  },
+  "avatar": "avatars/expert.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "zh": "为我的APP制定国内外发行计划，列出适合的平台、注册步骤和缺失材料。",
+    "en": "Plan my app release, including platforms, registration, and missing materials."
+  },
+  "plugin": "app-factory-expert",
+  "tags": [
+    {
+      "zh": "APP开发",
+      "en": "Development"
+    },
+    {
+      "zh": "全球发行",
+      "en": "Global Release"
+    },
+    {
+      "zh": "上架向导",
+      "en": "Store Guidance"
+    }
+  ],
+  "quickPrompts": [
+    {
+      "zh": "为我的APP制定国内外发行计划，列出适合的平台、注册步骤和缺失材料。",
+      "en": "Plan my app release, including platforms, registration, and missing materials."
+    },
+    {
+      "zh": "把我的APP想法做成可运行版本，并准备多平台发行候选包。",
+      "en": "Build my app and prepare multi-platform release candidates."
+    },
+    {
+      "zh": "检查现有APP的上架准备情况，生成各平台发布清单与进度表。",
+      "en": "Review release readiness and create a per-platform checklist and status table."
+    }
+  ],
+  "homepage": "https://github.com/liangsili2022/app-factory",
+  "license": "MIT"
+}
