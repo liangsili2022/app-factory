@@ -1,5 +1,11 @@
 # 🏭 App Factory (应用工厂)
 
+## WorkBuddy：APP全球发行专家
+
+在原有开发、测试和构建流程上，新增 WorkBuddy 单专家适配：国内外11条发行路线目录、开发者注册向导、多平台发布流程、发行记录模板及本地计划生成器。详见 [专家说明](integrations/workbuddy/app-factory-expert/README.md) 与 [验证记录](docs/workbuddy-delivery.md)。
+
+构建候选包：`python3 scripts/package_workbuddy.py`；包内验证：`python3 scripts/smoke_workbuddy.py`。平台目录记录官方来源及待核事项；当前未内置经过验收的商店上传连接器，账号注册、审核及正式上线需要逐平台实际操作与证据。
+
 > **Multi-Agent Software Engineering Pipeline**
 > Combining Garry Tan's **gstack** role disciplines, Jesse Vincent's **Superpowers** engineering rigor, and real-machine compiler verification.
 > Detects 12 AI coding agent CLIs. Tested end to end on the author's Mac with 6 of them.
